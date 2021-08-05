@@ -1,0 +1,8 @@
+176.220.172.244, Turkey, Avea Iletisim Hizmetleri
+5.46.93.112, Turkey, Avea Iletisim Hizmetleri
+78.191.248.137, Turkey, TTNet A.S.
+88.227.244.53, Turkey, TurkTelecom
+95.70.194.76, Turkey, TurkNet Iletisim Hizmetleri
+213.254.128.151, Turkey, SOL-DSL
+78.186.111.152, Turkey, TurkTelecom
+91.93.119.21, Turkey, Tellcom Iletisim Hizmetleri A.S.

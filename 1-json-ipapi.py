@@ -2,7 +2,24 @@ import re
 import json
 from urllib2 import urlopen
 
-url = "http://ip-api.com/json/24.48.0.1"
-response = urlopen(url)
-data = json.load(response)
+ip_file = open("ip-apis.txt", "r")
+isps_file = open("isps.txt", "w")
 
+ips_list = ip_file.readlines()
+ip_file.close()
+
+
+
+url = "http://ip-api.com/json/"
+
+for ip in ips_list:
+    response = urlopen(url + ip)
+    data = json.load(response)
+    j = {"query" : data["query"], "country" : data["country"], "isp" : data["isp"]}
+
+
+    isps_file.write(j["query"] + ", " + j["country"] + ", " + j["isp"] + "\n")
+    
+    print j["query"] + " | " + j["country"] + " | " + j["isp"]
+    
+isps_file.close()
