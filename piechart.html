@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Turkcell</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        header {
+            background-color: dodgerblue;
+            padding: 5px;
+            text-align: center;
+            font-size: 30px;
+            color: white;
+        }
+
+        .button {
+            width: 30%;
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        select {
+            width: 69%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #f1f1f1;
+        }
+
+        div {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Turkcell Tv-plus</h2>
+    </header>
+
+
+    <div id="piechart"></div>
+    <select id="listofdates"></select>
+    <button id="button" class="button">Choose</button>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="chart_content.js"></script>
+    <script type="text/javascript" src="dates.js"></script>
+    <script type="text/javascript" src="dates_string.js"></script>
+
+    <script type="text/javascript">
+        var select = document.getElementById("listofdates");
+        for (var i = 0; i < dates.length; i++) {
+            select.options[select.options.length] = new Option(dates_string[i], i.toString());
+        }
+
+        document.getElementById("button").addEventListener("click", Clicked);
+        var arr = [['ISP', 'How Many Users']];
+        var selected = dates[dates.length - 1]; //the last one
+        Clicked();
+
+
+        function Clicked() {
+            if (select.options.length > 0) {
+                arr = [['ISP', 'How Many Users']];
+
+                selected = dates[select.options[select.selectedIndex].value];
+                console.log(selected);
+                for (var i = 0; i < selected.length; i++) {
+                    arr.push([selected[i][0], selected[i][1]])
+                }
+                // Load google charts
+                google.charts.load('current', { 'packages': ['corechart'] });
+                google.charts.setOnLoadCallback(drawChart);
+
+            }
+            else {
+                window.alert("Select box is empty");
+            }
+        }
+
+        // Draw the chart and set the chart values
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(arr);
+
+            // Optional; add a title and set the width and height of the chart
+            var options = { 'title': 'ISPs', 'width': 550, 'height': 400 };
+
+            // Display the chart inside the <div> element with id="piechart"
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+</body>
+</html>
